@@ -50,10 +50,10 @@ public class ApplicationInstaller
             ? Path.Combine(Directory.GetCurrentDirectory(), "../Api", "wwwroot")
             : Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "_content", "Api");
 
-       app.UseStaticFiles(new StaticFileOptions()
-        {
-            FileProvider = new PhysicalFileProvider(contentPath),
-        });
+       //app.UseStaticFiles(new StaticFileOptions()
+       // {
+       //     FileProvider = new PhysicalFileProvider(contentPath),
+       // });
 
         return app.RunAsync();
     }

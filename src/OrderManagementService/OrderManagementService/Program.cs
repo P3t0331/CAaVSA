@@ -4,6 +4,7 @@ using OrderManagement.Application.Installers;
 using OrderManagement.Core.Database;
 using OrderManagement.Core.Installers;
 using Wolverine;
+using Wolverine.Transports.Tcp;
 
 namespace OrderManagementService
 {
@@ -23,7 +24,8 @@ namespace OrderManagementService
             builder.Services.InstallCore();
             builder.Services.InstallApplication();
 
-            builder.Host.UseWolverine();
+            builder.Host.UseWolverine(opts => opts.PublishAllMessages().ToPort(8010));
+
 
             var app = builder.Build();
 

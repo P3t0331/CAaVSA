@@ -2,6 +2,7 @@ using Microsoft.Extensions.FileProviders;
 using Presentation.Common.Extensions;
 using Serilog;
 using Wolverine;
+using Wolverine.Transports.Tcp;
 
 public class ApplicationInstaller
 {
@@ -19,7 +20,7 @@ public class ApplicationInstaller
 
         builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
-        builder.Host.UseWolverine();
+        builder.Host.UseWolverine(opts => opts.ListenAtPort(8010));
 
         return Task.FromResult(builder);
     }

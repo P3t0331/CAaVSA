@@ -1,9 +1,9 @@
 
-using Carter;
 using OrderManagement.Application.Installers;
 using OrderManagement.Core.Database;
 using OrderManagement.Core.Installers;
 using Wolverine;
+using Wolverine.Http;
 using Wolverine.Transports.Tcp;
 
 namespace OrderManagementService
@@ -47,7 +47,7 @@ namespace OrderManagementService
 
             app.UseAuthorization();
 
-            app.MapCarter();
+            app.MapWolverineEndpoints();
 
             app.Run();
         }

@@ -42,6 +42,13 @@ public class CreateOrderDao : ICreateOrderDao
         return id;
     }
 
+    public async Task<IEnumerable<OrderItem>> GetOrderItems()
+    {
+        using var connection = _context.CreateConnection();
+
+        return await connection.QueryAsync<OrderItem>(@"Select * from OrderItem");
+    }
+
     public async Task AddOrderItems(Guid orderId, List<OrderItem> orderItems)
     {
         foreach (var item in orderItems)

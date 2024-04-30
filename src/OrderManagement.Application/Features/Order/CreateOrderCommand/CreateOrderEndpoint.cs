@@ -1,23 +1,19 @@
-﻿using Carter;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Routing;
-using Wolverine;
+﻿using Wolverine;
+using Wolverine.Http;
 using static OrderManagement.Application.Features.Order.CreateOrderCommand.ICreateOrderDao;
 
 namespace OrderManagement.Application.Features.Order.CreateOrderCommand;
 
-public class CreateOrderEndpoint : ICarterModule
+public class CreateOrderEndpoint
 {
-    public void AddRoutes(IEndpointRouteBuilder app)
+    [WolverinePost("/api/Order")]
+    public static async Task<Response> Get(Request request, IMessageBus sender)
     {
-        app.MapPost("api/Order", async (Request request, IMessageBus sender) =>
-        {
-            var command = new CreateOrderCommand(request.CustomerId, request.OrderDate, request.OrderItems);
+        var command = new CreateOrderCommand(request.CustomerId, request.OrderDate, request.OrderItems);
 
-            var result = await sender.InvokeAsync<CreateOrderCommand.Result>(command);
+        var result = await sender.InvokeAsync<CreateOrderCommand.Result>(command);
 
-            return new Response(true);
-        });
+        return new Response(true);
     }
 
     public record Request(Guid CustomerId, DateTime OrderDate, List<OrderItem> OrderItems);

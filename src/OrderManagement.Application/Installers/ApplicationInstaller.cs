@@ -2,7 +2,6 @@
 using System.Reflection;
 using OrderManagement.Core.Installers;
 using Wolverine.Attributes;
-using Carter;
 
 [assembly: WolverineModule]
 namespace OrderManagement.Application.Installers;
@@ -14,6 +13,5 @@ public static class ApplicationInstaller
         var assembly = Assembly.GetExecutingAssembly();
 
         services.InstallRegisterAttribute(assembly);
-        services.AddCarter();
     }
 }

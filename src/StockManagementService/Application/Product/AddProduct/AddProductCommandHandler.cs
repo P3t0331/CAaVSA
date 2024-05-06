@@ -23,6 +23,7 @@ public class AddProductCommandHandler
                                 new(command.Price), 
                                 new(command.Sku))
                             );
+        await _repository.CommitAsync();
 
         return new(product.Id.Value, product.Name.Value, product.Description.Value, product.Price.Value, product.Sku.Value);
     }
